@@ -1,0 +1,1225 @@
+/* Outfit is the body/UI-copy face throughout; Bungee is used sparingly, only
+   for display text that wants a chunkier, more TF2-flavored voice (the
+   title, and each collapsible section's own label - see h1/.settings-
+   section-title/#scripts-details summary below). Valve's own "TF2 Build"
+   display font isn't freely licensed, so this is a stand-in in the same
+   spirit (bold, condensed, a little comic) rather than a literal match. */
+@import url('../public/fonts/fonts.css');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Matches body's own background-color - without this, html/the popup's own
+   viewport defaults to a plain white background, which could show through
+   any gap around body/#app's own box. */
+html {
+  background: #201c1a;
+}
+
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  width: 280px;
+  color: #e8e0d8;
+}
+
+/* #app owns the scrolling and the background fill. It deliberately has no
+   border-radius: Firefox draws its own rounded panel around extension
+   popups, outside this page's DOM, and a second rounding of ours never
+   pixel-aligns with it (the corners show a different color). Scrolling
+   lives here rather than on body because body's overflow is propagated to
+   the viewport. */
+#app {
+  background-color: #201c1a;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 600px;
+  /* Always reserve the scrollbar gutter, so content width does not change
+     when the content grows past max-height and a scrollbar appears. */
+  scrollbar-gutter: stable;
+}
+
+/* ── HEADER ── */
+/* A very low-opacity noise layer (inline SVG feTurbulence, no external
+   asset) sits on top of the existing gradient - reads as a faint canvas
+   grain rather than a flat digital gradient, closer to TF2's own panel
+   texture. Kept subtle deliberately: this is a 280px popup, not a poster. */
+#header {
+  display: flex;
+  flex-direction: row;
+  /* flex-start, not center: #header-text holds the expandable #scripts-list,
+     and centering would make the icon drift down as it expands. */
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 14px 12px;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #2a2220 0%, #201c1a 100%);
+}
+
+#header img {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* The cog that opens the settings page. Same neutral chip as the quick-link
+   buttons; top-aligned with the icon. */
+.header-settings-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  color: #a89c8e;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.header-settings-btn:hover,
+.header-settings-btn:focus-visible {
+  background: rgba(79, 176, 196, 0.18);
+  border-color: rgba(79, 176, 196, 0.55);
+  color: #dff5f8;
+  outline: none;
+}
+
+#header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Bungee only ships one weight, and reads noticeably bigger/heavier than
+   Outfit at the same font-size - sized down a point and given lighter
+   letter-spacing to compensate, rather than just swapping the family in
+   place. */
+h1 {
+  font-family: 'Bungee', 'Outfit', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #f0e8de;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── DISCLOSURE ARROWS ──
+   Shared by every <summary> in the popup (the scripts-count line, the two
+   settings sections) - marks each one as expandable and reflects its current
+   state, native semantics (aria-expanded via <details>'s own open attribute)
+   included for free. Each summary's own background/color/etc still comes
+   from its own more specific class (#scripts-details summary,
+   .settings-section-title) - only the arrow glyph itself is shared here. */
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: 6px;
+  transition: transform 0.15s ease;
+}
+
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+/* ── INFO TOOLTIP ──
+   Shared "?" badge + hover/focus tooltip - a CSS-only replacement for a
+   native title="..." attribute (which can't be themed, appears slowly, and
+   never shows on touch at all) and for a permanently-visible hint line
+   (which eats vertical space in a 280px popup whether or not anyone needs
+   the explanation). Reused wherever a label's own text isn't enough on its
+   own (see .tf2te-label-row's own callers in popup.html - the calculator's
+   own field labels/section headers, and a couple of the settings fields).
+
+   The tooltip is positioned relative to the whole row (left:0; right:0),
+   not to the "?" icon: anchored to the icon it overflowed the popup's right
+   edge whenever the icon sat more than ~50px from the left.
+
+   :focus-within on the .tf2te-info wrapper (not just :hover) is what makes
+   this reachable by keyboard, not just a mouse. */
+.tf2te-label-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Every other .tf2te-label-row caller pairs the icon with a single-line
+   label; a checkbox's own label text (see popup.html's General settings
+   panel) can wrap to two lines in this popup's 280px width, so this variant
+   top-aligns the icon with the first line instead of the shared rule's
+   vertical-center (which would otherwise float the "?" oddly between lines),
+   and lets the label itself shrink/wrap freely alongside the icon's own
+   fixed size. */
+.tf2te-label-row--checkbox {
+  align-items: flex-start;
+}
+
+.tf2te-label-row--checkbox .settings-checkbox-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.tf2te-label-row--checkbox .tf2te-info {
+  margin-top: 1px;
+}
+
+.tf2te-info {
+  display: inline-flex;
+}
+
+.tf2te-info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #7a6f63;
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: help;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.tf2te-info-btn:hover,
+.tf2te-info-btn:focus-visible {
+  color: #8fd8e5;
+  border-color: rgba(79, 176, 196, 0.55);
+  background: rgba(79, 176, 196, 0.18);
+  outline: none;
+}
+
+.tf2te-info-tooltip {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #100e0b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  color: #c8bdb0;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.4;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-2px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  pointer-events: none;
+}
+
+.tf2te-info:hover ~ .tf2te-info-tooltip,
+.tf2te-info:focus-within ~ .tf2te-info-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf2te-info-tooltip {
+    transition: none;
+  }
+}
+
+/* ── STATUS BADGE ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Green = active: a script is running on this page right now. */
+.badge--active {
+  background: rgba(111, 191, 115, 0.2);
+  border: 1px solid rgba(111, 191, 115, 0.55);
+  color: #a8e0ab;
+}
+
+.badge--active::before {
+  background: #a8e0ab;
+  box-shadow: 0 0 5px rgba(111, 191, 115, 0.9);
+}
+
+/* Neutral gray = inactive - this just means "nothing to do on this page",
+   the normal state for most tabs you'll ever open the popup on, not a
+   problem - red read as an alarm for what's actually an everyday non-event.
+   Red stays reserved for genuine failures (e.g. an invalid API key, see
+   .settings-status-line[data-status="error"] below). */
+.badge--inactive {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #a89c8e;
+}
+
+.badge--inactive::before {
+  background: #a89c8e;
+}
+
+/* ── SETTINGS GROUPS ──
+   Collapsible sections are grouped into three labeled cards (Account,
+   Preferences & Tools, API Credentials; see popup.html).
+
+   Plain block flow throughout the group/card/details chain, deliberately
+   not flex or grid: various flex/grid stretch setups left some element in
+   this chain narrower than its parent, while a plain block box always fills
+   its containing block. Spacing therefore comes from margin-top on the
+   following sibling rather than `gap`. */
+.settings-group {
+  padding: 0 10px;
+}
+
+.settings-group-label + * {
+  margin-top: 6px;
+}
+
+.settings-group + .settings-group {
+  margin-top: 10px;
+}
+
+/* Same gap between the last group and the footer as between groups. */
+.settings-group + footer {
+  margin-top: 10px;
+}
+
+/* Wider gap below the quick-links divider (a section transition, not
+   peer sections). */
+#quick-links + .settings-group {
+  margin-top: 16px;
+}
+
+.settings-group-label {
+  padding: 0 2px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6f8296;
+}
+
+.settings-group-card {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.settings-group-card > * + * {
+  margin-top: 6px;
+}
+
+/* ── QUICK LINKS ──
+   "/my/" is Steam's own logged-in-user shortcut - it substitutes in whichever
+   profile URL (/id/<vanity>/ or /profiles/<steamid64>/) belongs to the
+   current session, for any path after it (confirmed against a real account's
+   own /id/<vanity>/tradeoffers/ URL), so none of these need to know or store
+   the user's SteamID64/vanity name.
+
+   The header's divider sits below this row so the row reads as part of the
+   header block.
+
+   A 2x2 grid rather than one row: four equal columns in the 280px popup
+   (~60px each) clipped labels like "Trade offers". */
+#quick-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 16px 10px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.quick-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  /* A grid item defaults to min-width: auto, which can push it wider than
+     its column and break the label's ellipsis. */
+  min-width: 0;
+  padding: 6px 4px;
+  border-radius: 8px;
+  /* Neutral, like .settings-check-btn: the blue elsewhere means "active" or
+     "primary action", and these are neither. */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  color: #c8bdb0;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.quick-link-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* The label truncates on its own, so the badge next to it keeps its size. */
+.quick-link-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mirrors background.js's toolbar badge (same red, same count via
+   chrome.action.getBadgeText), hidden at 0. */
+.quick-link-badge {
+  flex-shrink: 0;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #c0392b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+}
+
+.quick-link-badge[hidden] {
+  display: none;
+}
+
+/* ── SCRIPTS (header) ──
+   Demoted from a full-width accordion row inside the settings stack (its
+   original position) to a quiet text line under the status badge (see
+   popup.html - now a direct child of #header-text) - this is diagnostic
+   info about the current page, not something a user configures, so it
+   shouldn't compete visually with the real settings sections below. Still a
+   real <details>/<summary> (see popup.js's own setActive/setInactive) -
+   only the chrome around it changes here, not the interaction; the arrow
+   glyph itself still comes from the shared "── DISCLOSURE ARROWS ──" rules
+   above. */
+#scripts-list summary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #7a6f63;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+#scripts-list summary:hover {
+  color: #a89c8e;
+}
+
+#scripts-list summary::before {
+  margin-right: 3px;
+}
+
+#scripts-list .script-item {
+  margin-top: 4px;
+}
+
+/* Individual script row */
+.script-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(79, 176, 196, 0.06);
+  border: 1px solid rgba(79, 176, 196, 0.18);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.script-item:hover {
+  background: rgba(79, 176, 196, 0.13);
+  border-color: rgba(79, 176, 196, 0.35);
+}
+
+.script-item span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #c8bdb0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+/* ── STATUS PENDING ──
+   Until the open tab answers (usually within milliseconds) the status badge
+   is invisible but keeps its space, so the header doesn't jump when it
+   appears. No "Loading" text: it flashed for a moment and named nothing. */
+.badge--pending {
+  visibility: hidden;
+}
+
+/* ── CALCULATOR ──
+   Lives inside the "Preferences & Tools" .settings-group-card. */
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calc-input-with-btn {
+  display: flex;
+  gap: 6px;
+}
+
+.calc-input-with-btn input {
+  flex: 1;
+}
+
+/* Custom "− [value] +" stepper - replaces the browser's own native
+   type="number" spin arrows (tiny, inconsistently styled across browsers,
+   and impossible to theme) with the same pill-shaped pattern already
+   established for the trade offer page's own amount fields
+   (steamcommunity.com/tradeOffer/pages/tradeoffer.js's ".tf2te-stepper"),
+   just recolored to this popup's own BLU palette instead of Steam's grey/
+   cyan. Only used on the two single-line price fields, which have the width
+   to spare - see the plain (spinner-free) inputs in the "You have" grid
+   below for why the 4-up layout doesn't get this treatment too. */
+.calc-stepper {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  min-width: 0;
+  border-radius: 6px;
+  background: #17140f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.calc-stepper:focus-within {
+  border-color: rgba(79, 176, 196, 0.6);
+}
+
+.calc-stepper input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: #e8e0d8;
+  font-family: inherit;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px 2px;
+}
+
+.calc-stepper input:focus {
+  outline: none;
+}
+
+/* The currency key-price stepper only gets half the popup's width (see
+   .calc-row--currency's own 1fr/1fr split with the Currency <select>), so
+   its placeholder ("e.g. 1.85") was overflowing/getting clipped at the
+   input's own 12px font-size - shrunk just for the ghost text, not the
+   real typed value, which stays fully readable at the normal size. */
+.calc-stepper input::placeholder {
+  font-size: 10.5px;
+}
+
+.calc-stepper-btn {
+  flex: 0 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #7a6f63;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.calc-stepper-btn:first-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calc-stepper-btn:last-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calc-stepper-btn:hover {
+  background: rgba(79, 176, 196, 0.18);
+  color: #8fd8e5;
+}
+
+.calc-stepper-btn:active {
+  background: rgba(79, 176, 196, 0.3);
+}
+
+.calc-stepper-btn:disabled {
+  cursor: default;
+  background: transparent;
+  color: #4a443c;
+}
+
+.calc-row--currency {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.calc-row--currency select {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #17140f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e8e0d8;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.calc-row--currency select:focus {
+  outline: none;
+  border-color: rgba(79, 176, 196, 0.6);
+}
+
+.calc-section-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #7a6f63;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.calc-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.calc-cell label {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #7a6f63;
+}
+
+.calc-cell input {
+  width: 100%;
+  padding: 5px 4px;
+  border-radius: 6px;
+  background: #17140f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e8e0d8;
+  font-family: inherit;
+  font-size: 11px;
+  text-align: center;
+}
+
+.calc-cell input:focus {
+  outline: none;
+  border-color: rgba(79, 176, 196, 0.6);
+}
+
+/* Result cells double as the include/exclude checkbox row - see
+   utils/calculator.js's own breakdownRefined for what unchecking one does. */
+.calc-grid--result .calc-cell {
+  padding: 6px 4px;
+  border-radius: 6px;
+  background: rgba(79, 176, 196, 0.06);
+  border: 1px solid rgba(79, 176, 196, 0.18);
+  align-items: center;
+}
+
+.calc-result-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #a89c8e;
+  cursor: pointer;
+}
+
+.calc-result-label input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.calc-result-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e8e0d8;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(79, 176, 196, 0.12);
+  border: 1.5px solid rgba(79, 176, 196, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.calc-math-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calc-math-input {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 5px 4px;
+  border-radius: 6px;
+  background: #17140f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e8e0d8;
+  font-family: inherit;
+  font-size: 11px;
+  text-align: center;
+}
+
+.calc-math-input:focus {
+  outline: none;
+  border-color: rgba(79, 176, 196, 0.6);
+}
+
+.calc-math-op {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: #7a6f63;
+}
+
+.calc-math-result {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  padding: 5px 4px;
+  border-radius: 6px;
+  background: rgba(79, 176, 196, 0.06);
+  border: 1px solid rgba(79, 176, 196, 0.18);
+}
+
+.calc-total output {
+  font-size: 13px;
+  font-weight: 700;
+  color: #8fd8e5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── SETTINGS ──
+   The two API-credential panels + Save live inside the "API Credentials"
+   .settings-group-card. */
+
+.settings-section-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  text-align: left;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  color: #a89c8e;
+  font-family: 'Bungee', 'Outfit', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+/* The wrench/Steam-ish glyph in front of each section's own label (see
+   popup.html) - sized/colored to sit quietly next to Bungee's own chunkier
+   letterforms rather than compete with them. */
+.settings-section-title svg {
+  flex-shrink: 0;
+  color: #7a6f63;
+}
+
+.settings-section-title:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Amber "needs attention" dot at the end of a section heading (the Steam Web
+   API heading while no key is saved). Same amber as the posts.tf key icon in
+   utils/linkButtonStates.js, so the two read as the same problem. */
+.settings-missing-dot {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f0b429;
+  box-shadow: 0 0 0 3px rgba(240, 180, 41, 0.18);
+}
+
+.settings-missing-dot[hidden] {
+  display: none;
+}
+
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.settings-panel label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #7a6f63;
+}
+
+.settings-panel input {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #17140f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e8e0d8;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.settings-panel input:focus {
+  outline: none;
+  border-color: rgba(79, 176, 196, 0.6);
+}
+
+.settings-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #a89c8e;
+  cursor: pointer;
+}
+
+.settings-checkbox-label input {
+  width: auto;
+  margin: 0;
+}
+
+#settings-save {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(79, 176, 196, 0.25);
+  border: 1px solid rgba(79, 176, 196, 0.5);
+  color: #dff5f8;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#settings-save:hover {
+  background: rgba(79, 176, 196, 0.4);
+}
+
+#settings-status {
+  display: block;
+  margin-top: 4px;
+  text-align: center;
+  font-size: 10px;
+  color: #7ecbd9;
+}
+
+.settings-hint {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #7a6f63;
+}
+
+.settings-hint a {
+  color: #7ecbd9;
+}
+
+.settings-status-line {
+  font-weight: 600;
+}
+
+.settings-status-line[data-status="ok"] {
+  color: #4caf82;
+}
+
+.settings-status-line[data-status="warn"] {
+  color: #d0a04a;
+}
+
+.settings-status-line[data-status="off"] {
+  color: #7a6f63;
+}
+
+.settings-status-line[data-status="error"] {
+  color: #c96260;
+}
+
+.settings-status-line:empty {
+  display: none;
+}
+
+.settings-check-btn {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  color: #c8bdb0;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.settings-check-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.settings-check-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ── FOOTER ── */
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #6a625a;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+/* The Discord server link, at the far end of the footer from the version.
+   Same pill as .version-badge, tinted Discord's own blue so the logo reads as
+   theirs; the title says what the server is for. */
+.footer-discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(88, 101, 242, 0.12);
+  border: 1px solid rgba(88, 101, 242, 0.35);
+  color: #a5adff;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.footer-discord:hover,
+.footer-discord:focus-visible {
+  background: rgba(88, 101, 242, 0.3);
+  border-color: rgba(88, 101, 242, 0.7);
+  color: #fff;
+}
+
+.footer-discord svg {
+  flex-shrink: 0;
+}
+
+/* ── TRADE OFFER SOUND (General settings) ── */
+.alert-sound {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.alert-sound__title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #7a6f63;
+}
+
+/* Shown while no Steam Web API key is saved: no offer is checked without
+   one, so no sound ever plays. Same amber as .settings-missing-dot. */
+.alert-sound__key-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid rgba(240, 180, 41, 0.35);
+  border-radius: 6px;
+  background: rgba(240, 180, 41, 0.08);
+  color: #d0a04a;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.alert-sound__key-warning[hidden] {
+  display: none;
+}
+
+.alert-sound__key-warning svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Reads as a link: it opens the Steam Web API settings further down. */
+.alert-sound__key-add {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #7ecbd9;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.alert-sound__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Same neutral chip as .settings-check-btn, round. */
+.alert-sound__play {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  color: #c8bdb0;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.alert-sound__play:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* While playing, the button is the Stop button, in the accent color. */
+.alert-sound__play[data-playing="true"] {
+  background: rgba(79, 176, 196, 0.18);
+  border-color: rgba(79, 176, 196, 0.55);
+  color: #dff5f8;
+}
+
+.alert-sound__play[data-playing="true"] .alert-sound__icon-play,
+.alert-sound__play:not([data-playing="true"]) .alert-sound__icon-stop {
+  display: none;
+}
+
+/* Undo .settings-panel input's text-field styling for the slider. */
+.settings-panel input.alert-sound__volume {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  accent-color: #4fb0c4;
+  cursor: pointer;
+}
+
+.alert-sound__value {
+  flex: none;
+  width: 32px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #a89c8e;
+}
+
+/* Same field look as the calculator's Currency <select>. min-width: 0 lets
+   a long custom file name shrink (the browser truncates it) instead of
+   pushing the remove button out of the row. */
+.alert-sound__select {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: #17140f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e8e0d8;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.alert-sound__select:focus {
+  outline: none;
+  border-color: rgba(79, 176, 196, 0.6);
+}
+
+/* The open list: dark like the field, and the sound in use (also marked
+   with a ✓ in its label, since color alone isn't enough to go by) in the
+   accent color. Where the platform draws its own native menu (macOS), these
+   are ignored and the ✓ still says it. */
+.alert-sound__select option {
+  background: #17140f;
+  color: #e8e0d8;
+  font-weight: 400;
+}
+
+.alert-sound__select option[data-current="true"] {
+  color: #7ecbd9;
+  font-weight: 600;
+}
+
+.alert-sound__remove {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  color: #a89c8e;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.alert-sound__remove:hover,
+.alert-sound__remove:focus-visible {
+  color: #e8a09e;
+  border-color: rgba(201, 98, 96, 0.55);
+  background: rgba(201, 98, 96, 0.15);
+  outline: none;
+}
+
+.alert-sound__remove[hidden] {
+  display: none;
+}
+
+.alert-sound__btn {
+  flex: none;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  color: #c8bdb0;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.alert-sound__btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.alert-sound__btn[hidden] {
+  display: none;
+}

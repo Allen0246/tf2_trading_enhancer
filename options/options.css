@@ -1,0 +1,627 @@
+/* The settings page: the popup's look (popup/popup.css) with room to
+   breathe. Same palette, Bungee for titles and Outfit for everything else,
+   the same teal accent and amber "needs attention". */
+@import url('../public/fonts/fonts.css');
+
+:root {
+  --bg: #201c1a;
+  --field: #17140f;
+  --text: #e8e0d8;
+  --text-strong: #f0e8de;
+  --text-soft: #c8bdb0;
+  --text-muted: #a89c8e;
+  --text-hint: #9a8e80;
+  --line: rgba(255, 255, 255, 0.07);
+  --card: rgba(255, 255, 255, 0.015);
+  --accent: #4fb0c4;
+  --accent-text: #7ecbd9;
+  --amber: #f0b429;
+  --ok: #4caf82;
+  --warn: #d0a04a;
+  --error: #c96260;
+  --chip-bg: rgba(255, 255, 255, 0.05);
+  --chip-border: rgba(255, 255, 255, 0.16);
+  --chip-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  scroll-padding-top: 24px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+a {
+  color: var(--accent-text);
+}
+
+a:hover {
+  color: #a6e0ea;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ── HEADER ── */
+.page-header {
+  background: linear-gradient(160deg, #2a2220 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--line);
+}
+
+.page-header__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.page-header__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.page-header__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Bungee', 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  color: var(--text-strong);
+}
+
+.page-header__subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #8a8178;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+/* The Discord server link, next to the version. Same pill, tinted Discord's
+   own blue so the logo reads as theirs; the popup's footer has the same one
+   (.footer-discord in popup/popup.css). */
+.discord-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(88, 101, 242, 0.12);
+  border: 1px solid rgba(88, 101, 242, 0.35);
+  color: #a5adff;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.discord-link:hover,
+.discord-link:focus-visible {
+  background: rgba(88, 101, 242, 0.3);
+  border-color: rgba(88, 101, 242, 0.7);
+  color: #fff;
+}
+
+.discord-link svg {
+  flex-shrink: 0;
+}
+
+/* ── LAYOUT: side menu + content; the menu stacks on top when narrow ── */
+.layout {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 32px 64px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.side-nav {
+  flex: 1 1 190px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: sticky;
+  top: 24px;
+}
+
+.side-nav__label {
+  padding: 0 10px 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7f93a8;
+}
+
+.side-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  color: var(--text-soft);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.side-nav__link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.side-nav__link.is-active {
+  background: rgba(79, 176, 196, 0.13);
+  border-color: rgba(79, 176, 196, 0.35);
+  color: #dff5f8;
+  font-weight: 600;
+}
+
+.content {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (max-width: 720px) {
+  .layout {
+    padding: 20px 16px 48px;
+  }
+
+  .page-header__inner {
+    padding: 18px 16px;
+  }
+
+  .side-nav {
+    position: static;
+    max-width: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .side-nav__label {
+    display: none;
+  }
+}
+
+/* ── SECTIONS AND CARDS ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 12px;
+  transition: box-shadow 0.4s ease;
+}
+
+/* Where the popup's button led (options.js focusSection). */
+.section--flash {
+  box-shadow: 0 0 0 2px rgba(79, 176, 196, 0.55), 0 0 0 8px rgba(79, 176, 196, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    transition: none;
+  }
+}
+
+.section__title {
+  margin: 0;
+  font-family: 'Bungee', 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--text-strong);
+}
+
+.lead {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.note {
+  margin: 0;
+  color: #8a8178;
+  font-size: 12.5px;
+}
+
+.card {
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+}
+
+.card--padded {
+  padding: 16px;
+  gap: 12px;
+}
+
+.card__heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card__heading h3,
+.card__subtitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.card__row {
+  padding: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.card__row--grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+}
+
+.card__row--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.card__row--split .option__text {
+  flex: 1 1 280px;
+}
+
+.card__status {
+  margin: 0;
+  padding: 0 16px 14px;
+}
+
+.card__divider {
+  height: 1px;
+  background: var(--line);
+}
+
+@media (max-width: 720px) {
+  .card__row--grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── CHECKBOX OPTIONS: label, then a written-out explanation ── */
+.option {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.option + .option {
+  border-top: 1px solid var(--line);
+}
+
+.option--flush {
+  padding: 4px 0 0;
+}
+
+.option input {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  accent-color: var(--accent);
+}
+
+.option__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.option__label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.option__hint {
+  margin: 0;
+  color: var(--text-hint);
+  font-size: 12.5px;
+}
+
+/* ── FIELDS AND BUTTONS ── */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.field {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--field);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  font-size: 13.5px;
+}
+
+.field:focus {
+  outline: none;
+  border-color: rgba(79, 176, 196, 0.6);
+}
+
+select.field {
+  cursor: pointer;
+}
+
+/* The open sound list: dark like the field, the sound in use (also marked
+   with a ✓, since color alone isn't enough) in the accent color. */
+select.field option {
+  background: var(--field);
+  color: var(--text);
+  font-weight: 400;
+}
+
+select.field option[data-current="true"] {
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.input-row .field {
+  flex: 1 1 260px;
+  width: auto;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.button-row--end {
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 7px 14px;
+  border-radius: 6px;
+  background: var(--chip-bg);
+  border: 1.5px solid var(--chip-border);
+  box-shadow: var(--chip-shadow);
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.btn--primary {
+  background: rgba(79, 176, 196, 0.25);
+  border: 1px solid rgba(79, 176, 196, 0.5);
+  color: #dff5f8;
+}
+
+.btn--primary:hover {
+  background: rgba(79, 176, 196, 0.4);
+}
+
+.btn--danger {
+  color: #e0a3a1;
+}
+
+.btn--danger:hover {
+  background: rgba(201, 98, 96, 0.15);
+  border-color: rgba(201, 98, 96, 0.55);
+}
+
+/* ── SOUND: play/stop and volume ── */
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.play-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--chip-bg);
+  border: 1.5px solid var(--chip-border);
+  box-shadow: var(--chip-shadow);
+  color: var(--text-soft);
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.play-btn[data-playing="true"] {
+  background: rgba(79, 176, 196, 0.18);
+  border-color: rgba(79, 176, 196, 0.55);
+  color: #dff5f8;
+}
+
+.play-btn[data-playing="true"] .play-btn__play,
+.play-btn:not([data-playing="true"]) .play-btn__stop {
+  display: none;
+}
+
+.volume {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.volume-value {
+  flex: none;
+  width: 38px;
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-soft);
+}
+
+/* ── STATUS LINES, DOTS, CALLOUTS ── */
+.status-line {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.status-line:empty {
+  display: none;
+}
+
+.status-line[data-status="ok"] {
+  color: var(--ok);
+}
+
+.status-line[data-status="warn"] {
+  color: var(--warn);
+}
+
+.status-line[data-status="off"] {
+  color: var(--text-hint);
+}
+
+.status-line[data-status="error"] {
+  color: var(--error);
+}
+
+.save-status {
+  color: var(--accent-text);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.save-status:empty {
+  display: none;
+}
+
+/* Amber "needs attention" dot, as in the popup. */
+.settings-missing-dot {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 3px rgba(240, 180, 41, 0.18);
+}
+
+.callout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+
+.callout svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.callout--warn {
+  background: rgba(240, 180, 41, 0.08);
+  border: 1px solid rgba(240, 180, 41, 0.35);
+  color: #f3d58e;
+}
+
+.callout--warn svg {
+  color: var(--amber);
+}
+
+/* ── ABOUT ── */
+.about {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  color: var(--text-muted);
+}

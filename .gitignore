@@ -1,0 +1,21 @@
+node_modules/
+web-ext-artifacts/
+.amo-upload-uuid
+.env
+
+# Never committed: tools, editors, OS files, build output, logs and merge
+# leftovers.
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+*.orig
+*.rej
+*.zip
+*.xpi
+
+# Unedited screenshots (may show SteamIDs or other traders). Only the
+# cropped versions in .github/screenshots/ are committed.
+.github/screenshots/raw/

@@ -1,0 +1,17 @@
+{
+  "name": "tf2-trading-enhancer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Useful scripts for TF2 trading (browser extension) - this package.json exists only to run the unit tests, it isn't part of the loaded extension.",
+  "scripts": {
+    "test": "node --experimental-test-module-mocks --test"
+  },
+  "webExt": {
+    "ignoreFiles": [
+      "tests",
+      "tests/**",
+      "package.json"
+    ]
+  }
+}

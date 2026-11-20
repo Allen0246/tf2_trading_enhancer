@@ -1,0 +1,207 @@
+{
+  "manifest_version": 3,
+
+  "name": "TF2 Trading Enhancer",
+  "version": "1.0.0",
+
+  "description": "Useful scripts for TF2 trading",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tf2-trading-enhancer@allen0246",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "TF2 Trading Enhancer"
+  },
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"],
+    "type": "module"
+  },
+
+  "permissions": ["storage", "alarms", "offscreen"],
+  "host_permissions": ["https://backpack.tf/*", "https://api.steampowered.com/*", "https://rep.tf/*", "https://pricedb.io/*", "https://marketplace.tf/*", "https://steamcommunity.com/*"],
+
+  "content_scripts": [
+    {
+      "matches": ["https://scrap.tf/*"],
+      "js": ["scrap.tf/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://marketplace.tf/*"],
+      "js": ["marketplace.tf/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://stntrading.eu/*"],
+      "js": ["stntrading.eu/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://mannco.store/*"],
+      "js": ["mannco.store/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://posts.tf/*"],
+      "js": ["posts.tf/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.backpack.tf/*"],
+      "js": ["backpack.tf/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://steamcommunity.com/profiles/*",
+        "https://steamcommunity.com/id/*",
+        "https://steamcommunity.com/tradeoffer/new/*",
+        "https://steamcommunity.com/market/*"
+      ],
+      "js": ["steamcommunity.com/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://steamcommunity.com/dev/apikey*"],
+      "js": ["steamcommunity.com/apiKeyStatus/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://steamcommunity.com/*/inventoryhistory*", "https://steamcommunity.com/*/tradehistory*"],
+      "js": ["steamcommunity.com/tradeHistoryFetch/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*.backpack.tf/*", "https://steamcommunity.com/*"],
+      "js": ["steamcommunity.com/tradeOffer/extensionUrlBridge.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://*.backpack.tf/*", "https://steamcommunity.com/*"],
+      "js": [
+        "steamcommunity.com/tradeOffer/unusualEffects.js",
+        "steamcommunity.com/tradeOffer/bundledParticleIds.js",
+        "steamcommunity.com/tradeOffer/shared.js",
+        "steamcommunity.com/tradeOffer/pages/backpackProfile.js",
+        "steamcommunity.com/tradeOffer/pages/marketListing.js",
+        "steamcommunity.com/tradeOffer/pages/inventory.js",
+        "steamcommunity.com/tradeOffer/pages/profileShowcase.js",
+        "steamcommunity.com/tradeOffer/pages/tradeOffersList.js",
+        "steamcommunity.com/tradeOffer/pages/tradeSlotOverrides.js",
+        "steamcommunity.com/tradeOffer/pages/tradeoffer.js",
+        "steamcommunity.com/tradeOffer/bootstrap.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://steamcommunity.com/profiles/*/inventory*", "https://steamcommunity.com/id/*/inventory*"],
+      "js": ["steamcommunity.com/inventoryMarketActions/mainWorld.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://next.backpack.tf/*"],
+      "js": ["backpack.tf/nextUI/premiumSearchLastSeenHighlight/mainWorld.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://next.backpack.tf/*"],
+      "js": ["backpack.tf/nextUI/fixTradeOfferLinks/mainWorld.js"],
+      "world": "MAIN",
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://steamcommunity.com/tradeoffer/*"],
+      "js": ["steamcommunity.com/tradeOfferRepCheck/content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://steamcommunity.com/tradeoffer/*",
+        "https://steamcommunity.com/id/*/tradeoffers*",
+        "https://steamcommunity.com/profiles/*/tradeoffers*"
+      ],
+      "js": ["steamcommunity.com/tradeOfferActions/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["images/particles/**", "images/icons/**"],
+      "matches": ["https://steamcommunity.com/*", "https://*.backpack.tf/*"]
+    },
+    {
+      "resources": ["backpack.tf/oldUI/**"],
+      "matches": ["https://*.backpack.tf/*"]
+    },
+    {
+      "resources": ["backpack.tf/nextUI/**"],
+      "matches": ["https://next.backpack.tf/*"]
+    },
+    {
+      "resources": ["backpack.tf/shared/**"],
+      "matches": ["https://*.backpack.tf/*"]
+    },
+    {
+      "resources": ["stntrading.eu/**"],
+      "matches": ["https://stntrading.eu/*"]
+    },
+    {
+      "resources": ["steamcommunity.com/**"],
+      "matches": ["https://steamcommunity.com/*"]
+    },
+    {
+      "resources": ["scrap.tf/**"],
+      "matches": ["https://scrap.tf/*"]
+    },
+    {
+      "resources": ["marketplace.tf/**"],
+      "matches": ["https://marketplace.tf/*"]
+    },
+    {
+      "resources": ["mannco.store/**"],
+      "matches": ["https://mannco.store/*"]
+    },
+    {
+      "resources": ["posts.tf/**"],
+      "matches": ["https://posts.tf/*"]
+    },
+    {
+      "resources": ["utils/**"],
+      "matches": [
+        "https://*.backpack.tf/*",
+        "https://scrap.tf/*",
+        "https://stntrading.eu/*",
+        "https://steamcommunity.com/*",
+        "https://marketplace.tf/*",
+        "https://mannco.store/*",
+        "https://posts.tf/*"
+      ]
+    }
+  ],
+  "icons": {
+    "256": "public/icons/png/icon_256.png",
+    "128": "public/icons/png/icon_128.png",
+    "64": "public/icons/png/icon_64.png",
+    "48": "public/icons/png/icon_48.png",
+    "32": "public/icons/png/icon_32.png",
+    "16": "public/icons/png/icon_16.png"
+  }
+}

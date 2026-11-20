@@ -1,0 +1,2073 @@
+[
+    {
+        "defindex": 82,
+        "name": "Airwolf",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15144,
+            15154,
+            15156
+        ]
+    },
+    {
+        "defindex": 232,
+        "name": "Alien Tech",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17232
+        ]
+    },
+    {
+        "defindex": 252,
+        "name": "Alpine",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17252
+        ]
+    },
+    {
+        "defindex": 28,
+        "name": "American Pastoral",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15028
+        ]
+    },
+    {
+        "defindex": 305,
+        "name": "Anodized Aloha",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16305
+        ]
+    },
+    {
+        "defindex": 26,
+        "name": "Antique Annihilator",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15026
+        ]
+    },
+    {
+        "defindex": 57,
+        "name": "Aqua Marine",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15057
+        ]
+    },
+    {
+        "defindex": 435,
+        "name": "Army Guns",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17435
+        ]
+    },
+    {
+        "defindex": 60,
+        "name": "Autumn",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15066,
+            15074,
+            15077,
+            15081,
+            15082,
+            15085
+        ]
+    },
+    {
+        "defindex": 160,
+        "name": "Autumn Mk.II",
+        "grade": "Freelance",
+        "itemDefindices": [
+            16160
+        ]
+    },
+    {
+        "defindex": 29,
+        "name": "Backcountry Blaster",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15029
+        ]
+    },
+    {
+        "defindex": 12,
+        "name": "Backwoods Boomstick",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15003
+        ]
+    },
+    {
+        "defindex": 112,
+        "name": "Backwoods Boomstick Mk.II",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16112
+        ]
+    },
+    {
+        "defindex": 66,
+        "name": "Balloonicorn",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15089,
+            15111
+        ]
+    },
+    {
+        "defindex": 306,
+        "name": "Bamboo Brushed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16306
+        ]
+    },
+    {
+        "defindex": 202,
+        "name": "Bank Rolled",
+        "grade": "Commando",
+        "itemDefindices": [
+            17202
+        ]
+    },
+    {
+        "defindex": 17,
+        "name": "Barn Burner",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15017
+        ]
+    },
+    {
+        "defindex": 434,
+        "name": "Beachy Boy",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17434
+        ]
+    },
+    {
+        "defindex": 46,
+        "name": "Black Dahlia",
+        "grade": "Commando",
+        "itemDefindices": [
+            15046
+        ]
+    },
+    {
+        "defindex": 431,
+        "name": "Blackout",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17431
+        ]
+    },
+    {
+        "defindex": 24,
+        "name": "Blasted Bombardier",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15024
+        ]
+    },
+    {
+        "defindex": 81,
+        "name": "Blitzkrieg",
+        "grade": "Commando",
+        "itemDefindices": [
+            15143,
+            15145,
+            15148,
+            15149,
+            15153,
+            15155
+        ]
+    },
+    {
+        "defindex": 200,
+        "name": "Bloom Buffed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17200
+        ]
+    },
+    {
+        "defindex": 69,
+        "name": "Blue Mew",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15094,
+            15100,
+            15104,
+            15106,
+            15110
+        ]
+    },
+    {
+        "defindex": 33,
+        "name": "Bogtrotter",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15033
+        ]
+    },
+    {
+        "defindex": 414,
+        "name": "Bomb Carrier",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17414
+        ]
+    },
+    {
+        "defindex": 217,
+        "name": "Bomber Soul",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17217
+        ]
+    },
+    {
+        "defindex": 64,
+        "name": "Boneyard",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15062,
+            15071,
+            15075,
+            15080
+        ]
+    },
+    {
+        "defindex": 207,
+        "name": "Bonk Varnished",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17207
+        ]
+    },
+    {
+        "defindex": 405,
+        "name": "Bonzo Gnawed",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17405
+        ]
+    },
+    {
+        "defindex": 30,
+        "name": "Bovine Blazemaker",
+        "grade": "Commando",
+        "itemDefindices": [
+            15030
+        ]
+    },
+    {
+        "defindex": 130,
+        "name": "Bovine Blazemaker Mk.II",
+        "grade": "Commando",
+        "itemDefindices": [
+            16130
+        ]
+    },
+    {
+        "defindex": 70,
+        "name": "Brain Candy",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15095,
+            15098,
+            15101,
+            15105
+        ]
+    },
+    {
+        "defindex": 429,
+        "name": "Brawler's Iron",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17429
+        ]
+    },
+    {
+        "defindex": 55,
+        "name": "Brick House",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15055
+        ]
+    },
+    {
+        "defindex": 291,
+        "name": "Broken Bones",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17291
+        ]
+    },
+    {
+        "defindex": 432,
+        "name": "Broken Record",
+        "grade": "Elite",
+        "itemDefindices": [
+            17432
+        ]
+    },
+    {
+        "defindex": 415,
+        "name": "Business Class",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17415
+        ]
+    },
+    {
+        "defindex": 84,
+        "name": "Butcher Bird",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15147,
+            15158
+        ]
+    },
+    {
+        "defindex": 220,
+        "name": "Cabin Fevered",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17220
+        ]
+    },
+    {
+        "defindex": 244,
+        "name": "Calavera Canvas",
+        "grade": "Commando",
+        "itemDefindices": [
+            17244
+        ]
+    },
+    {
+        "defindex": 258,
+        "name": "Candy Coated",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17258
+        ]
+    },
+    {
+        "defindex": 211,
+        "name": "Cardboard Boxed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17211
+        ]
+    },
+    {
+        "defindex": 4,
+        "name": "Carpet Bomber",
+        "grade": "Commando",
+        "itemDefindices": [
+            15012
+        ]
+    },
+    {
+        "defindex": 104,
+        "name": "Carpet Bomber Mk.II",
+        "grade": "Commando",
+        "itemDefindices": [
+            16104
+        ]
+    },
+    {
+        "defindex": 410,
+        "name": "Chilly Autumn",
+        "grade": "Commando",
+        "itemDefindices": [
+            17410
+        ]
+    },
+    {
+        "defindex": 40,
+        "name": "Citizen Pain",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15040
+        ]
+    },
+    {
+        "defindex": 44,
+        "name": "Civic Duty",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15044
+        ]
+    },
+    {
+        "defindex": 144,
+        "name": "Civic Duty Mk.II",
+        "grade": "Civilian",
+        "itemDefindices": [
+            16144
+        ]
+    },
+    {
+        "defindex": 39,
+        "name": "Civil Servant",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15039
+        ]
+    },
+    {
+        "defindex": 139,
+        "name": "Civil Servant Mk.II",
+        "grade": "Civilian",
+        "itemDefindices": [
+            16139
+        ]
+    },
+    {
+        "defindex": 209,
+        "name": "Clover Camo'd",
+        "grade": "Commando",
+        "itemDefindices": [
+            17209
+        ]
+    },
+    {
+        "defindex": 76,
+        "name": "Coffin Nail",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15115,
+            15116,
+            15120,
+            15123,
+            15127,
+            15129,
+            15131,
+            15132,
+            15135,
+            15137
+        ]
+    },
+    {
+        "defindex": 283,
+        "name": "Cookie Fortress",
+        "grade": "Commando",
+        "itemDefindices": [
+            17283
+        ]
+    },
+    {
+        "defindex": 83,
+        "name": "Corsair",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15146,
+            15157
+        ]
+    },
+    {
+        "defindex": 225,
+        "name": "Cosmic Calamity",
+        "grade": "Commando",
+        "itemDefindices": [
+            17225
+        ]
+    },
+    {
+        "defindex": 21,
+        "name": "Country Crusher",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15021
+        ]
+    },
+    {
+        "defindex": 261,
+        "name": "Crawlspace Critters",
+        "grade": "Commando",
+        "itemDefindices": [
+            17261
+        ]
+    },
+    {
+        "defindex": 401,
+        "name": "Cream Corned",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17401
+        ]
+    },
+    {
+        "defindex": 308,
+        "name": "Croc Dusted",
+        "grade": "Commando",
+        "itemDefindices": [
+            16308
+        ]
+    },
+    {
+        "defindex": 53,
+        "name": "Current Event",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15053
+        ]
+    },
+    {
+        "defindex": 234,
+        "name": "Damascus and Mahogany",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17234
+        ]
+    },
+    {
+        "defindex": 51,
+        "name": "Dead Reckoner",
+        "grade": "Commando",
+        "itemDefindices": [
+            15051
+        ]
+    },
+    {
+        "defindex": 151,
+        "name": "Dead Reckoner Mk.II",
+        "grade": "Commando",
+        "itemDefindices": [
+            16151
+        ]
+    },
+    {
+        "defindex": 416,
+        "name": "Deadly Dragon",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17416
+        ]
+    },
+    {
+        "defindex": 263,
+        "name": "Death Deluxe",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17263
+        ]
+    },
+    {
+        "defindex": 442,
+        "name": "Die'n Dasher",
+        "grade": "Commando",
+        "itemDefindices": [
+            17442
+        ]
+    },
+    {
+        "defindex": 224,
+        "name": "Dovetailed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17224
+        ]
+    },
+    {
+        "defindex": 390,
+        "name": "Dragon Slayer",
+        "grade": "Elite",
+        "itemDefindices": [
+            16390
+        ]
+    },
+    {
+        "defindex": 212,
+        "name": "Dream Piped",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17212
+        ]
+    },
+    {
+        "defindex": 78,
+        "name": "Dressed to Kill",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15118,
+            15121,
+            15124,
+            15126,
+            15133,
+            15136,
+            15138,
+            15139
+        ]
+    },
+    {
+        "defindex": 34,
+        "name": "Earth, Sky and Fire",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15034
+        ]
+    },
+    {
+        "defindex": 241,
+        "name": "Electroshocked",
+        "grade": "Elite",
+        "itemDefindices": [
+            17241
+        ]
+    },
+    {
+        "defindex": 272,
+        "name": "Elfin Enamel",
+        "grade": "Commando",
+        "itemDefindices": [
+            17272
+        ]
+    },
+    {
+        "defindex": 265,
+        "name": "Eyestalker",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17265
+        ]
+    },
+    {
+        "defindex": 205,
+        "name": "Fire Glazed",
+        "grade": "Elite",
+        "itemDefindices": [
+            17205
+        ]
+    },
+    {
+        "defindex": 49,
+        "name": "Flash Fryer",
+        "grade": "Commando",
+        "itemDefindices": [
+            15049
+        ]
+    },
+    {
+        "defindex": 72,
+        "name": "Flower Power",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15097,
+            15103,
+            15107,
+            15109
+        ]
+    },
+    {
+        "defindex": 9,
+        "name": "Forest Fire",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15005
+        ]
+    },
+    {
+        "defindex": 109,
+        "name": "Forest Fire Mk.II",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16109
+        ]
+    },
+    {
+        "defindex": 210,
+        "name": "Freedom Wrapped",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17210
+        ]
+    },
+    {
+        "defindex": 246,
+        "name": "Frost Ornamented",
+        "grade": "Commando",
+        "itemDefindices": [
+            17246
+        ]
+    },
+    {
+        "defindex": 281,
+        "name": "Frosty Delivery",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17281
+        ]
+    },
+    {
+        "defindex": 279,
+        "name": "Frozen Aurora",
+        "grade": "Commando",
+        "itemDefindices": [
+            17279
+        ]
+    },
+    {
+        "defindex": 215,
+        "name": "Geometrical Teams",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17215
+        ]
+    },
+    {
+        "defindex": 242,
+        "name": "Ghost Town",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17242
+        ]
+    },
+    {
+        "defindex": 400,
+        "name": "Ghoul Blaster",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17400
+        ]
+    },
+    {
+        "defindex": 253,
+        "name": "Gift Wrapped",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17253
+        ]
+    },
+    {
+        "defindex": 276,
+        "name": "Gifting Mann's Wrapping Paper",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17276
+        ]
+    },
+    {
+        "defindex": 270,
+        "name": "Gingerbread Winner",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17270
+        ]
+    },
+    {
+        "defindex": 282,
+        "name": "Glacial Glazed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17282
+        ]
+    },
+    {
+        "defindex": 423,
+        "name": "Gobi Glazed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17423
+        ]
+    },
+    {
+        "defindex": 267,
+        "name": "Gourdy Green",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17267
+        ]
+    },
+    {
+        "defindex": 425,
+        "name": "Graphite Gripped",
+        "grade": "Commando",
+        "itemDefindices": [
+            17425
+        ]
+    },
+    {
+        "defindex": 223,
+        "name": "Hana",
+        "grade": "Commando",
+        "itemDefindices": [
+            17223
+        ]
+    },
+    {
+        "defindex": 236,
+        "name": "Haunted Ghosts",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17236
+        ]
+    },
+    {
+        "defindex": 226,
+        "name": "Hazard Warning",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17226
+        ]
+    },
+    {
+        "defindex": 406,
+        "name": "Health and Hell",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17406
+        ]
+    },
+    {
+        "defindex": 407,
+        "name": "Health and Hell (Green)",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17407
+        ]
+    },
+    {
+        "defindex": 255,
+        "name": "Helldriver",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17255
+        ]
+    },
+    {
+        "defindex": 35,
+        "name": "Hickory Hole-Puncher",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15035
+        ]
+    },
+    {
+        "defindex": 79,
+        "name": "High Roller's",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15122,
+            15130,
+            15134
+        ]
+    },
+    {
+        "defindex": 18,
+        "name": "Homemade Heater",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15018
+        ]
+    },
+    {
+        "defindex": 239,
+        "name": "Horror Holiday",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17239
+        ]
+    },
+    {
+        "defindex": 408,
+        "name": "Hypergon",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17408
+        ]
+    },
+    {
+        "defindex": 248,
+        "name": "Igloo",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17248
+        ]
+    },
+    {
+        "defindex": 20,
+        "name": "Iron Wood",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15020
+        ]
+    },
+    {
+        "defindex": 120,
+        "name": "Iron Wood Mk.II",
+        "grade": "Freelance",
+        "itemDefindices": [
+            16120
+        ]
+    },
+    {
+        "defindex": 230,
+        "name": "Jazzy",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17230
+        ]
+    },
+    {
+        "defindex": 204,
+        "name": "Kill Covered",
+        "grade": "Commando",
+        "itemDefindices": [
+            17204
+        ]
+    },
+    {
+        "defindex": 85,
+        "name": "Killer Bee",
+        "grade": "Elite",
+        "itemDefindices": [
+            15151
+        ]
+    },
+    {
+        "defindex": 296,
+        "name": "Kiln and Conquer",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17296
+        ]
+    },
+    {
+        "defindex": 10,
+        "name": "King of the Jungle",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15004
+        ]
+    },
+    {
+        "defindex": 438,
+        "name": "Krak-coated",
+        "grade": "Commando",
+        "itemDefindices": [
+            17438
+        ]
+    },
+    {
+        "defindex": 310,
+        "name": "Leopard Printed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16310
+        ]
+    },
+    {
+        "defindex": 47,
+        "name": "Lightning Rod",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15047
+        ]
+    },
+    {
+        "defindex": 45,
+        "name": "Liquid Asset",
+        "grade": "Elite",
+        "itemDefindices": [
+            15045
+        ]
+    },
+    {
+        "defindex": 41,
+        "name": "Local Hero",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15041
+        ]
+    },
+    {
+        "defindex": 58,
+        "name": "Low Profile",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15058
+        ]
+    },
+    {
+        "defindex": 19,
+        "name": "Lumber From Down Under",
+        "grade": "Commando",
+        "itemDefindices": [
+            15019
+        ]
+    },
+    {
+        "defindex": 63,
+        "name": "Macabre Web",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15060,
+            15064,
+            15065,
+            15079,
+            15084,
+            15086
+        ]
+    },
+    {
+        "defindex": 163,
+        "name": "Macabre Web Mk.II",
+        "grade": "Freelance",
+        "itemDefindices": [
+            16163
+        ]
+    },
+    {
+        "defindex": 303,
+        "name": "Macaw Masked",
+        "grade": "Commando",
+        "itemDefindices": [
+            16303
+        ]
+    },
+    {
+        "defindex": 302,
+        "name": "Mannana Peeled",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16302
+        ]
+    },
+    {
+        "defindex": 5,
+        "name": "Masked Mender",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15008
+        ]
+    },
+    {
+        "defindex": 105,
+        "name": "Masked Mender Mk.II",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16105
+        ]
+    },
+    {
+        "defindex": 42,
+        "name": "Mayor",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15042
+        ]
+    },
+    {
+        "defindex": 420,
+        "name": "Mechanized Monster",
+        "grade": "Commando",
+        "itemDefindices": [
+            17420
+        ]
+    },
+    {
+        "defindex": 203,
+        "name": "Merc Stained",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17203
+        ]
+    },
+    {
+        "defindex": 404,
+        "name": "Metalized Soul",
+        "grade": "Commando",
+        "itemDefindices": [
+            17404
+        ]
+    },
+    {
+        "defindex": 213,
+        "name": "Miami Element",
+        "grade": "Elite",
+        "itemDefindices": [
+            17213
+        ]
+    },
+    {
+        "defindex": 287,
+        "name": "Misfortunate",
+        "grade": "Elite",
+        "itemDefindices": [
+            17287
+        ]
+    },
+    {
+        "defindex": 73,
+        "name": "Mister Cuddles",
+        "grade": "Commando",
+        "itemDefindices": [
+            15099
+        ]
+    },
+    {
+        "defindex": 228,
+        "name": "Mosaic",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17228
+        ]
+    },
+    {
+        "defindex": 268,
+        "name": "Mummified Mimic",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17268
+        ]
+    },
+    {
+        "defindex": 297,
+        "name": "Necromanced",
+        "grade": "Commando",
+        "itemDefindices": [
+            17297
+        ]
+    },
+    {
+        "defindex": 430,
+        "name": "Necropolish",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17430
+        ]
+    },
+    {
+        "defindex": 214,
+        "name": "Neo Tokyo",
+        "grade": "Commando",
+        "itemDefindices": [
+            17214
+        ]
+    },
+    {
+        "defindex": 289,
+        "name": "Neon-Ween",
+        "grade": "Commando",
+        "itemDefindices": [
+            17289
+        ]
+    },
+    {
+        "defindex": 14,
+        "name": "Night Owl",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15000
+        ]
+    },
+    {
+        "defindex": 114,
+        "name": "Night Owl Mk.II",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16114
+        ]
+    },
+    {
+        "defindex": 11,
+        "name": "Night Terror",
+        "grade": "Commando",
+        "itemDefindices": [
+            15002
+        ]
+    },
+    {
+        "defindex": 61,
+        "name": "Nutcracker",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15061,
+            15068,
+            15069,
+            15073,
+            15088
+        ]
+    },
+    {
+        "defindex": 161,
+        "name": "Nutcracker Mk.II",
+        "grade": "Civilian",
+        "itemDefindices": [
+            16161
+        ]
+    },
+    {
+        "defindex": 437,
+        "name": "Ocean Mapped",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17437
+        ]
+    },
+    {
+        "defindex": 27,
+        "name": "Old Country",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15027
+        ]
+    },
+    {
+        "defindex": 256,
+        "name": "Organ-ically Hellraised",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17256
+        ]
+    },
+    {
+        "defindex": 419,
+        "name": "Pacific Peacemaker",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17419
+        ]
+    },
+    {
+        "defindex": 301,
+        "name": "Park Pigmented",
+        "grade": "Elite",
+        "itemDefindices": [
+            16301
+        ]
+    },
+    {
+        "defindex": 294,
+        "name": "Party Phantoms",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17294
+        ]
+    },
+    {
+        "defindex": 273,
+        "name": "Peppermint Swirl",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17273
+        ]
+    },
+    {
+        "defindex": 309,
+        "name": "Piña Polished",
+        "grade": "Commando",
+        "itemDefindices": [
+            16309
+        ]
+    },
+    {
+        "defindex": 48,
+        "name": "Pink Elephant",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15048
+        ]
+    },
+    {
+        "defindex": 427,
+        "name": "Piranha Mania",
+        "grade": "Commando",
+        "itemDefindices": [
+            17427
+        ]
+    },
+    {
+        "defindex": 206,
+        "name": "Pizza Polished",
+        "grade": "Commando",
+        "itemDefindices": [
+            17206
+        ]
+    },
+    {
+        "defindex": 22,
+        "name": "Plaid Potshotter",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15022
+        ]
+    },
+    {
+        "defindex": 122,
+        "name": "Plaid Potshotter Mk.II",
+        "grade": "Freelance",
+        "itemDefindices": [
+            16122
+        ]
+    },
+    {
+        "defindex": 221,
+        "name": "Polar Surprise",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17221
+        ]
+    },
+    {
+        "defindex": 295,
+        "name": "Polter-Guised",
+        "grade": "Commando",
+        "itemDefindices": [
+            17295
+        ]
+    },
+    {
+        "defindex": 262,
+        "name": "Portal Plastered",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17262
+        ]
+    },
+    {
+        "defindex": 292,
+        "name": "Potent Poison",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17292
+        ]
+    },
+    {
+        "defindex": 3,
+        "name": "Psychedelic Slugger",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15011
+        ]
+    },
+    {
+        "defindex": 62,
+        "name": "Pumpkin Patch",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15067,
+            15070,
+            15083,
+            15087
+        ]
+    },
+    {
+        "defindex": 259,
+        "name": "Pumpkin Pied",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17259
+        ]
+    },
+    {
+        "defindex": 409,
+        "name": "Pumpkin Plastered",
+        "grade": "Commando",
+        "itemDefindices": [
+            17409
+        ]
+    },
+    {
+        "defindex": 7,
+        "name": "Purple Range",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15007
+        ]
+    },
+    {
+        "defindex": 201,
+        "name": "Quack Canvassed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17201
+        ]
+    },
+    {
+        "defindex": 67,
+        "name": "Rainbow",
+        "grade": "Elite",
+        "itemDefindices": [
+            15090,
+            15091,
+            15112
+        ]
+    },
+    {
+        "defindex": 264,
+        "name": "Raving Dead",
+        "grade": "Commando",
+        "itemDefindices": [
+            17264
+        ]
+    },
+    {
+        "defindex": 25,
+        "name": "Reclaimed Reanimator",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15025
+        ]
+    },
+    {
+        "defindex": 86,
+        "name": "Red Bear",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15152
+        ]
+    },
+    {
+        "defindex": 0,
+        "name": "Red Rock Roscoe",
+        "grade": "Elite",
+        "itemDefindices": [
+            15013
+        ]
+    },
+    {
+        "defindex": 38,
+        "name": "Rooftop Wrangler",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15038
+        ]
+    },
+    {
+        "defindex": 16,
+        "name": "Rustic Ruiner",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15016
+        ]
+    },
+    {
+        "defindex": 271,
+        "name": "Saccharine Striped",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17271
+        ]
+    },
+    {
+        "defindex": 403,
+        "name": "Sacred Slayer",
+        "grade": "Elite",
+        "itemDefindices": [
+            17403
+        ]
+    },
+    {
+        "defindex": 1,
+        "name": "Sand Cannon",
+        "grade": "Elite",
+        "itemDefindices": [
+            15014
+        ]
+    },
+    {
+        "defindex": 56,
+        "name": "Sandstone Special",
+        "grade": "Commando",
+        "itemDefindices": [
+            15056
+        ]
+    },
+    {
+        "defindex": 433,
+        "name": "Sandwich Dinner",
+        "grade": "Commando",
+        "itemDefindices": [
+            17433
+        ]
+    },
+    {
+        "defindex": 284,
+        "name": "Sarsaparilla Sprayed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17284
+        ]
+    },
+    {
+        "defindex": 304,
+        "name": "Sax Waxed",
+        "grade": "Assassin",
+        "itemDefindices": [
+            16304
+        ]
+    },
+    {
+        "defindex": 293,
+        "name": "Searing Souls",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17293
+        ]
+    },
+    {
+        "defindex": 412,
+        "name": "Secretly Serviced",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17412
+        ]
+    },
+    {
+        "defindex": 249,
+        "name": "Seriously Snowed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17249
+        ]
+    },
+    {
+        "defindex": 52,
+        "name": "Shell Shocker",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15052
+        ]
+    },
+    {
+        "defindex": 23,
+        "name": "Shot in the Dark",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15023
+        ]
+    },
+    {
+        "defindex": 74,
+        "name": "Shot to Hell",
+        "grade": "Commando",
+        "itemDefindices": [
+            15102,
+            15108
+        ]
+    },
+    {
+        "defindex": 440,
+        "name": "Sideshow",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17440
+        ]
+    },
+    {
+        "defindex": 290,
+        "name": "Simple Spirits",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17290
+        ]
+    },
+    {
+        "defindex": 286,
+        "name": "Skull Cracked",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17286
+        ]
+    },
+    {
+        "defindex": 235,
+        "name": "Skull Study",
+        "grade": "Commando",
+        "itemDefindices": [
+            17235
+        ]
+    },
+    {
+        "defindex": 413,
+        "name": "Sky Stallion",
+        "grade": "Elite",
+        "itemDefindices": [
+            17413
+        ]
+    },
+    {
+        "defindex": 424,
+        "name": "Sleek Greek",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17424
+        ]
+    },
+    {
+        "defindex": 251,
+        "name": "Sleighin' Style",
+        "grade": "Commando",
+        "itemDefindices": [
+            17251
+        ]
+    },
+    {
+        "defindex": 43,
+        "name": "Smalltown Bringdown",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15043
+        ]
+    },
+    {
+        "defindex": 143,
+        "name": "Smalltown Bringdown Mk.II",
+        "grade": "Civilian",
+        "itemDefindices": [
+            16143
+        ]
+    },
+    {
+        "defindex": 250,
+        "name": "Smissmas Camo",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17250
+        ]
+    },
+    {
+        "defindex": 278,
+        "name": "Smissmas Spycrabs",
+        "grade": "Commando",
+        "itemDefindices": [
+            17278
+        ]
+    },
+    {
+        "defindex": 391,
+        "name": "Smissmas Sweater",
+        "grade": "Commando",
+        "itemDefindices": [
+            16391
+        ]
+    },
+    {
+        "defindex": 247,
+        "name": "Smissmas Village",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17247
+        ]
+    },
+    {
+        "defindex": 245,
+        "name": "Snow Covered",
+        "grade": "Commando",
+        "itemDefindices": [
+            17245
+        ]
+    },
+    {
+        "defindex": 275,
+        "name": "Snow Globalization",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17275
+        ]
+    },
+    {
+        "defindex": 277,
+        "name": "Snowflake Swirled",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17277
+        ]
+    },
+    {
+        "defindex": 50,
+        "name": "Spark of Life",
+        "grade": "Commando",
+        "itemDefindices": [
+            15050
+        ]
+    },
+    {
+        "defindex": 237,
+        "name": "Spectral Shimmered",
+        "grade": "Commando",
+        "itemDefindices": [
+            17237
+        ]
+    },
+    {
+        "defindex": 257,
+        "name": "Spectrum Splattered",
+        "grade": "Elite",
+        "itemDefindices": [
+            17257
+        ]
+    },
+    {
+        "defindex": 269,
+        "name": "Spider Season",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17269
+        ]
+    },
+    {
+        "defindex": 266,
+        "name": "Spider's Cluster",
+        "grade": "Commando",
+        "itemDefindices": [
+            17266
+        ]
+    },
+    {
+        "defindex": 238,
+        "name": "Spirit of Halloween",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17238
+        ]
+    },
+    {
+        "defindex": 36,
+        "name": "Spruce Deuce",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15036
+        ]
+    },
+    {
+        "defindex": 71,
+        "name": "Stabbed to Hell",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15096
+        ]
+    },
+    {
+        "defindex": 208,
+        "name": "Star Crossed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17208
+        ]
+    },
+    {
+        "defindex": 421,
+        "name": "Stardust",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17421
+        ]
+    },
+    {
+        "defindex": 280,
+        "name": "Starlight Serenity",
+        "grade": "Elite",
+        "itemDefindices": [
+            17280
+        ]
+    },
+    {
+        "defindex": 426,
+        "name": "Stealth Specialist",
+        "grade": "Commando",
+        "itemDefindices": [
+            17426
+        ]
+    },
+    {
+        "defindex": 411,
+        "name": "Steel Brushed",
+        "grade": "Commando",
+        "itemDefindices": [
+            17411
+        ]
+    },
+    {
+        "defindex": 441,
+        "name": "Storage War",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17441
+        ]
+    },
+    {
+        "defindex": 8,
+        "name": "Sudden Flurry",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15009
+        ]
+    },
+    {
+        "defindex": 402,
+        "name": "Sunriser",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17402
+        ]
+    },
+    {
+        "defindex": 285,
+        "name": "Swashbuckled",
+        "grade": "Commando",
+        "itemDefindices": [
+            17285
+        ]
+    },
+    {
+        "defindex": 68,
+        "name": "Sweet Dreams",
+        "grade": "Assassin",
+        "itemDefindices": [
+            15092,
+            15113
+        ]
+    },
+    {
+        "defindex": 260,
+        "name": "Sweet Toothed",
+        "grade": "Commando",
+        "itemDefindices": [
+            17260
+        ]
+    },
+    {
+        "defindex": 15,
+        "name": "Tartan Torpedo",
+        "grade": "Commando",
+        "itemDefindices": [
+            15015
+        ]
+    },
+    {
+        "defindex": 436,
+        "name": "Taxi Cabbed",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17436
+        ]
+    },
+    {
+        "defindex": 428,
+        "name": "Team Charged",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17428
+        ]
+    },
+    {
+        "defindex": 422,
+        "name": "Team Detail",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17422
+        ]
+    },
+    {
+        "defindex": 417,
+        "name": "Team Serviced",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17417
+        ]
+    },
+    {
+        "defindex": 37,
+        "name": "Team Sprayer",
+        "grade": "Freelance",
+        "itemDefindices": [
+            15037
+        ]
+    },
+    {
+        "defindex": 439,
+        "name": "Team Union",
+        "grade": "Elite",
+        "itemDefindices": [
+            17439
+        ]
+    },
+    {
+        "defindex": 59,
+        "name": "Thunderbolt",
+        "grade": "Elite",
+        "itemDefindices": [
+            15059
+        ]
+    },
+    {
+        "defindex": 307,
+        "name": "Tiger Buffed",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16307
+        ]
+    },
+    {
+        "defindex": 77,
+        "name": "Top Shelf",
+        "grade": "Commando",
+        "itemDefindices": [
+            15117,
+            15119,
+            15125,
+            15128,
+            15140
+        ]
+    },
+    {
+        "defindex": 75,
+        "name": "Torqued to Hell",
+        "grade": "Commando",
+        "itemDefindices": [
+            15114
+        ]
+    },
+    {
+        "defindex": 240,
+        "name": "Totally Boned",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            17240
+        ]
+    },
+    {
+        "defindex": 32,
+        "name": "Treadplate Tormenter",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15032
+        ]
+    },
+    {
+        "defindex": 243,
+        "name": "Tumor Toasted",
+        "grade": "Assassin",
+        "itemDefindices": [
+            17243
+        ]
+    },
+    {
+        "defindex": 54,
+        "name": "Turbine Torcher",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15054
+        ]
+    },
+    {
+        "defindex": 218,
+        "name": "Uranium",
+        "grade": "Commando",
+        "itemDefindices": [
+            17218
+        ]
+    },
+    {
+        "defindex": 31,
+        "name": "War Room",
+        "grade": "Commando",
+        "itemDefindices": [
+            15031
+        ]
+    },
+    {
+        "defindex": 418,
+        "name": "Warborn",
+        "grade": "Commando",
+        "itemDefindices": [
+            17418
+        ]
+    },
+    {
+        "defindex": 80,
+        "name": "Warhawk",
+        "grade": "Elite",
+        "itemDefindices": [
+            15141,
+            15142,
+            15150
+        ]
+    },
+    {
+        "defindex": 65,
+        "name": "Wildwood",
+        "grade": "Civilian",
+        "itemDefindices": [
+            15063,
+            15072,
+            15076,
+            15078
+        ]
+    },
+    {
+        "defindex": 254,
+        "name": "Winterland Wrapped",
+        "grade": "Elite",
+        "itemDefindices": [
+            17254
+        ]
+    },
+    {
+        "defindex": 6,
+        "name": "Woodland Warrior",
+        "grade": "Commando",
+        "itemDefindices": [
+            15006
+        ]
+    },
+    {
+        "defindex": 106,
+        "name": "Woodland Warrior Mk.II",
+        "grade": "Commando",
+        "itemDefindices": [
+            16106
+        ]
+    },
+    {
+        "defindex": 13,
+        "name": "Woodsy Widowmaker",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            15001
+        ]
+    },
+    {
+        "defindex": 113,
+        "name": "Woodsy Widowmaker Mk.II",
+        "grade": "Mercenary",
+        "itemDefindices": [
+            16113
+        ]
+    },
+    {
+        "defindex": 2,
+        "name": "Wrapped Reviver",
+        "grade": "Commando",
+        "itemDefindices": [
+            15010
+        ]
+    },
+    {
+        "defindex": 102,
+        "name": "Wrapped Reviver Mk.II",
+        "grade": "Commando",
+        "itemDefindices": [
+            16102
+        ]
+    },
+    {
+        "defindex": 300,
+        "name": "Yeti Coated",
+        "grade": "Assassin",
+        "itemDefindices": [
+            16300
+        ]
+    }
+]

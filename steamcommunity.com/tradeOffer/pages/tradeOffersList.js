@@ -1,0 +1,426 @@
+/**
+ * steamcommunity.com trade offers list pages (id or profiles, .../tradeoffers).
+ * Registers into the shared script registry built by ../shared.js; executed by ../bootstrap.js.
+ */
+(function () {
+'use strict';
+
+window.__tf2te__.scripts.push(
+    {
+        includes: [
+            /^https?:\/\/steamcommunity\.com\/(?:id|profiles)\/.*\/tradeoffers/
+        ],
+        styles: `
+            /* Text buttons in Steam's own small grey style, where the
+               report button was. (They used to be site logos hotlinked
+               from imgur, which told imgur about every visit.) */
+            .btn_user_link {
+                margin-left: 6px;
+                float: right;
+            }
+
+            .tradeoffer_items_summary {
+                position: relative;
+                background-color: #1D1D1D;
+                border: 1px solid #3D3D3E;
+                border-radius: 5px;
+                padding: 17px;
+                margin-top: 8px;
+                width: 100%;
+                font-size: 12px;
+                color: #FFFFFF;
+                display: flex;
+                box-sizing: border-box;
+            }
+            
+            .items_summary {
+                width: 50%;
+                margin-right: 2.1%;
+                display: inline-block;
+            }
+            
+            .items_summary:last-child {
+                margin-right: 0;
+            }
+            
+            .summary_header {
+                margin-bottom: 12px;
+            }
+            
+            .summary_item {
+                display: inline-block;
+                width: 44px;
+                height: 44px;
+                padding: 3px;
+                margin: 0 2px 2px 0;
+                border: 1px solid;
+                background-color: #3C352E;
+                background-position: center;
+                background-size: 44px 44px;
+                background-repeat: no-repeat;
+            }
+            
+            .summary_badge {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                padding: 1px 3px;
+                color: #FFFFFF;
+                border-radius: 4px;
+                background-color: #209DE6;
+                font-size: 14px;
+                cursor: default;
+                font-weight: bold;
+            }
+            
+            ${window.__tf2te__.sharedStyles.itemOverlay}
+
+            .decline_active_button {
+                display: block;
+                margin-top: 0.6em;
+                text-align: center;
+            }
+        `,
+        fn: function main({ WINDOW, addAttributesToHoverItems }) {
+            const dom = {
+                offers: document.getElementsByClassName('tradeoffer')
+            };
+            
+            // modify each trade offer
+            Array.from(dom.offers).forEach((offerEl) => {
+                // add buttons to the offer
+                const reportButtonEl = offerEl.getElementsByClassName('btn_report')[0];
+                
+                // sent offers will not have a report button - we won't add any buttons to them
+                if (reportButtonEl != null) {
+                    // match steamid, personaname
+                    const pattern = /ReportTradeScam\( ?\'(\d{17})\', ?"(.*)"\ ?\)/;
+                    const match = (reportButtonEl.getAttribute('onclick') || '').match(pattern);
+                    
+                    if (match) {
+                        const [ , steamid, personaname] = match;
+                        
+                        // generate the html for the buttons
+                        const html = (function getButtons() {
+                            // generate html for button
+                            // personaname is the trade partner's own Steam
+                            // name - untrusted text that can contain quotes
+                            // and markup, so it must be escaped before it
+                            // goes into the HTML string below.
+                            const escapeHtml = (string) => string
+                                .replace(/&/g, '&amp;')
+                                .replace(/</g, '&lt;')
+                                .replace(/>/g, '&gt;')
+                                .replace(/"/g, '&quot;')
+                                .replace(/'/g, '&#39;');
+                            const getButton = (button) => {
+                                const makeReplacements = (string) => {
+                                    // Function replacers, so "$&"-style
+                                    // patterns in a name are inserted as-is
+                                    // instead of being expanded.
+                                    return string.replace('%personaname%', () => personaname).replace('%steamid%', () => steamid);
+                                };
+                                const href = escapeHtml(makeReplacements(button.url));
+                                const title = escapeHtml(makeReplacements(button.title));
+                                const classes = [
+                                    'btn_grey_grey',
+                                    'btn_small',
+                                    'btn_user_link'
+                                ];
+
+                                return `<a href="${href}" title="${title}" class="${classes.join(' ')}" target="_blank" rel="noopener noreferrer"><span>${button.label}</span></a>`;
+                            };
+                            // all the lovely buttons we want to add - order here is the final
+                            // left-to-right visual order (see "reverse to preserve order" below)
+                            const buttons = [
+                                {
+                                    title: 'View %personaname%\'s next.backpack.tf profile',
+                                    url: 'https://next.backpack.tf/profiles/%steamid%',
+                                    label: 'next.bp.tf'
+                                },
+                                {
+                                    title: 'View %personaname%\'s backpack',
+                                    // %steamid% is replaced with user's steamid
+                                    url: 'https://backpack.tf/profiles/%steamid%',
+                                    label: 'bp.tf'
+                                },
+                                {
+                                    title: 'View %personaname%\'s posts.tf profile',
+                                    url: 'https://posts.tf/users/%steamid%',
+                                    label: 'posts.tf'
+                                },
+                                {
+                                    title: 'View %personaname%\'s Rep.tf page',
+                                    url: 'https://rep.tf/%steamid%',
+                                    label: 'rep.tf'
+                                }
+                            ].map(getButton);
+                            // reverse to preserve order
+                            const html = buttons.reverse().join('');
+                            
+                            return html;
+                        }());
+                        
+                        // insert html for buttons
+                        reportButtonEl.insertAdjacentHTML('beforebegin', html);
+                    }
+                    
+                    // we don't really want it
+                    reportButtonEl.remove();
+                }
+                
+                // summarize the offer
+                const itemsList = offerEl.getElementsByClassName('tradeoffer_item_list');
+                
+                // summarize each list
+                Array.from(itemsList).forEach((itemsEl) => {
+                    const itemsArr = Array.from(itemsEl.getElementsByClassName('trade_item'));
+                    const getClassInfo = (itemEl) => {
+                        return itemEl.getAttribute('data-economy-item');
+                    };
+                    // has multiples of the same item
+                    const hasMultipleSameItems = Boolean(function() {
+                        let infos = [];
+                        
+                        return itemsArr.some((itemEl) => {
+                            let classinfo = getClassInfo(itemEl);
+                            
+                            if (infos.indexOf(classinfo) !== -1) {
+                                return true;
+                            } else {
+                                infos.push(classinfo);
+                                return false;
+                            }
+                        });
+                    }());
+                    const shouldModifyDOM = Boolean(
+                        itemsArr.length > 0 &&
+                        hasMultipleSameItems
+                    );
+                    
+                    // only modify dom if necessary
+                    if (!shouldModifyDOM) {
+                        // continue
+                        return;
+                    }
+                    
+                    const fragment = document.createDocumentFragment();
+                    const clearEl = document.createElement('div');
+                    // get summarized items and sort elements by properties
+                    // most of this stuff should be fairly optimized
+                    const items = (function() {
+                        const getSort = (key, item) => {
+                            let index, value;
+                            
+                            if (key === 'count') {
+                                index = -item.count;
+                            } else {
+                                value = item.props[key];
+                                index = sorts[key].indexOf(value);
+                                
+                                if (index === -1) {
+                                    sorts[key].push(value);
+                                    index = sorts[key].indexOf(value);
+                                }
+                            }
+                            
+                            return index;
+                        };
+                        // some parameters to sort by
+                        const sorts = {
+                            app: [
+                                // team fortress 2
+                                '440',
+                                // csgo
+                                '730'
+                            ],
+                            color: [
+                                // unusual
+                                'rgb(134, 80, 172)',
+                                // collectors
+                                'rgb(170, 0, 0)',
+                                // strange
+                                'rgb(207, 106, 50)',
+                                // haunted
+                                'rgb(56, 243, 171)',
+                                // genuine
+                                'rgb(77, 116, 85)',
+                                // vintage
+                                'rgb(71, 98, 145)',
+                                // decorated
+                                'rgb(250, 250, 250)',
+                                // unique
+                                'rgb(125, 109, 0)'
+                            ]
+                        };
+                        // this reduces the items on the page and puts them into
+                        // a group which contains the count for that item
+                        const items = (function() {
+                            const getItem = (classinfo, itemEl) => {
+                                return {
+                                    classinfo,
+                                    app: classinfo.replace('classinfo/', '').split('/')[0],
+                                    color: itemEl.style.borderColor
+                                };
+                            };
+                            const items = itemsArr.reduce((result, itemEl) => {
+                                const classinfo = getClassInfo(itemEl);
+                                
+                                if (result[classinfo]) {
+                                    result[classinfo].count += 1;
+                                } else {
+                                    result[classinfo] = {
+                                        el: itemEl,
+                                        count: 1,
+                                        props: getItem(classinfo, itemEl)
+                                    };
+                                }
+                                
+                                return result;
+                            }, {});
+                            
+                            return Object.values(items);
+                        }());
+                        const sorted = items.sort((a, b) => {
+                            let index = 0;
+                            
+                            // sort by these keys
+                            // break when difference is found
+                            [
+                                'app',
+                                'color',
+                                'count'
+                            ].find((key) => {
+                                // get the sort value for a and b
+                                const [sortA, sortB] = [a, b].map((value) => {
+                                    return getSort(key, value);
+                                });
+                                
+                                // these are already sorted in the proper direction
+                                if (sortA > sortB) {
+                                    index = 1;
+                                    return true;
+                                } else if (sortA < sortB) {
+                                    index = -1;
+                                    return true;
+                                }
+                            });
+                            
+                            return index;
+                        });
+                        
+                        return sorted;
+                    }());
+                    
+                    items.forEach(({ el, count }) => {
+                        if (count > 1) {
+                            // add badge
+                            const badgeEl = document.createElement('span');
+                            
+                            badgeEl.classList.add('summary_badge');
+                            badgeEl.textContent = count;
+                            
+                            el.appendChild(badgeEl);
+                        }
+                        
+                        fragment.appendChild(el);
+                    });
+                    
+                    clearEl.style.clear = 'both';
+                    // add clearfix to end of fragment
+                    fragment.appendChild(clearEl);
+                    // clear html before-hand to reduce dom manipulation
+                    itemsEl.innerHTML = '';
+                    itemsEl.appendChild(fragment);
+                });
+            });
+            
+            // add attributes to images
+            {
+                const itemsList = document.getElementsByClassName('trade_item');
+                
+                addAttributesToHoverItems(itemsList);
+            }
+            
+            // add the button to decline all trade offers
+            {
+                // ActOnTradeOffer is read at call time (in declineOffer),
+                // not captured here - shared.js wraps whatever function gets
+                // assigned to it, including one Steam defines after this runs.
+                const { ShowConfirmDialog } = WINDOW;
+                // gets an array of id's of all active trade offers on page
+                const getActiveTradeOfferIDs = () => {
+                    const getTradeOfferIDs = (tradeOffersList) => {
+                        const getTradeOfferID = (el) => el.id.replace('tradeofferid_', '');
+                        
+                        return tradeOffersList.map(getTradeOfferID);
+                    };
+                    const isActive = (el) => !el.querySelector('.inactive');
+                    const tradeOffersList = Array.from(document.getElementsByClassName('tradeoffer'));
+                    const activeTradeOffersList = tradeOffersList.filter(isActive);
+                    
+                    return getTradeOfferIDs(activeTradeOffersList);
+                };
+                // declines any number of trades by their id
+                const declineOffers = (tradeOfferIDs) => {
+                    const declineOffer = (tradeOfferID) => {
+                        WINDOW.ActOnTradeOffer(tradeOfferID, 'decline', 'Trade Declined', 'Decline Trade');
+                    };
+                    
+                    tradeOfferIDs.forEach(declineOffer);
+                };
+                
+                const newTradeOfferBtnEl = document.querySelector('.new_trade_offer_btn');
+                const canAct = Boolean(
+                    // this should probably always be there...
+                    // but maybe not always
+                    newTradeOfferBtnEl &&
+                    // page must have active trade offers
+                    getActiveTradeOfferIDs().length > 0
+                );
+                
+                if (!canAct) {
+                    // stop right there
+                    return;
+                }
+                
+                const declineAllButtonEl = (function() {
+                    const el = document.createElement('div');
+                    const textEl = document.createElement('span');
+                    
+                    el.appendChild(textEl);
+                    el.classList.add('btn_darkred_white_innerfade', 'btn_medium', 'decline_active_button');
+                    textEl.textContent = 'Decline All Active...';
+                    
+                    return el;
+                }());
+                
+                // add the button... after the "New Trade Offer" button
+                newTradeOfferBtnEl.parentNode.insertBefore(declineAllButtonEl, newTradeOfferBtnEl.nextSibling);
+                
+                // add the handler to show the dialog on click
+                declineAllButtonEl.addEventListener('click', () => {
+                    ShowConfirmDialog(
+                        'Decline Active',
+                        'Are you sure you want to decline all active trade offers?',
+                        'Decline Trade Offers',
+                        null
+                    ).done((str) => {
+                        // yes
+                        const responseIsYes = str === 'OK';
+                        
+                        if (responseIsYes) {
+                            const tradeOfferIDs = getActiveTradeOfferIDs();
+                            
+                            declineOffers(tradeOfferIDs);
+                            declineAllButtonEl.remove();
+                        }
+                    });
+                });
+            }
+        }
+    },
+
+);
+
+}());
